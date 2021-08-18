@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おみくじ！</title>
+   
+    <link rel="stylesheet" href="style.css">
+    
+
+</head>
+
+
+
+
+<body>
+
+ 
+
+<div id="home" class="big-bg">
+    
+    <header class="page_header">
+        <h1>
+            <a href="index.html">
+            <img class="logo" img src="img.占い　円マーク.img" alt="" srcset="">
+            </a>
+        </h1>
+   
+      
+<!-- ここからアコーデオンメニュー -->
+    <div class="ac-menu">
+        <input id="ac-1" type="checkbox" />
+        <label for="ac-1">占い</label>
+        <div class="ac-menu-inside">
+        縁起の悪い占いです！
+        </div>
+    </div>
+
+    <div class="ac-menu">
+        <input id="ac-2" type="checkbox" />
+        <label for="ac-2">四柱推命</label>
+        <div class="ac-menu-inside">
+            人材急募、経験不問です！
+        </div>
+    </div>
+
+    <div class="ac-menu">
+        <input id="ac-3" type="checkbox" />
+        <label for="ac-3">タロット</label>
+        <div class="ac-menu-inside">
+            人材急募、今日から稼げます！
+        </div>
+    </div>
+
+    <div class="ac-menu">
+        <input id="ac-4" type="checkbox" />
+        <label for="ac-4">霊感占い</label>
+        <div class="ac-menu-inside">
+            霊感商法経験者優遇します！
+        </div>
+    </div>
+
+
+    </header>
+
+
+    <!-- ここからaudio -->
+  
+    <h1 class="audio_mpeg">↓癒しが必要な方はこちら
+    <audio type="audio/mpeg" src="bgm.mp3" controls></audio>
+    </h1>
+  
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function(){
+
+        const audioElement = document.querySelector("audio");
+
+        audioElement.addEventListener('loadeddata', (e)=> {
+        // audioElement.muted = true;
+        audioElement.autoplay = true;
+        });
+        });
+
+    </script>
+
+      <!-- ここまでaudio -->
+   
+
+   
+    
+
+       
+
+     <!-- メインメッセージ -->
+    
+    <!-- <div class = main_message>今日の運勢</div> -->
+
+    <p class = "main_message">今日の運勢</p>
+    <p class = "sub_message">～あたらない縁起の悪いおみくじ～</p>
+
+    <p id="today">
+
+
+
+    </p>
+
+    
+    <!-- <input type="date" name="" id=""> -->
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.4.1/jquery-migrate.min.js?ver=1.4.1'></script>
+    <script src='demo.js'></script>
+    
+
+    
+    <!-- 要確認　揺れるメインメッセージ 　揺れない！-->
+    <script>
+    $('p').each(function(){
+        var txt= $(this).html();
+        $(this).html(txt.replace("今日の運勢","<span>今日</span><span>の</span><span>運勢</span>")
+        );
+      });
+    </script>
+
+     
+
+    <script>
+    //今日の日付データを変数に格納
+            //変数は"today"とする
+            var today=new Date(); 
+
+            var year = today.getFullYear();
+            var month = today.getMonth()+1;
+            var week = today.getDay();
+            var day = today.getDate();
+
+            var week_ja= new Array("日","月","火","水","木","金","土");
+
+          
+         
+
+            // 日付のフォントサイズ、色を変更したい どうCSSを充てるのか？ 
+        
+        var str = year+"年"+month+"月"+day+"日 "+week_ja[week]+"曜日";
+        document.getElementById('today').innerHTML = str ;
+        
+
+        cosole.log(str)
+
+             
+
+    </script>
+
+
+
+    
+    <div class="container">
+        
+        <!-- クリックボタン -->
+        <h1 class="button">
+        <button onclick = "draw()">念じながらここを押す</button>
+        </h1>
+
+        <!-- 運勢メッセージ -->
+
+        <h2 class="unsei_message">
+        <p class="fadein txt01">今日のあなたの運勢は、 </p>
+
+        <p class="unsei kekka fadein txt02" ><span id = "fortune" class="fortune">大凶</span ></p>
+
+        <p class="unsei kekka fadein txt03">!!!</p>
+                  
+        </h2>
+
+
+
+        
+
+
+
+
+    </div>
+</div>
+
+  
+    <script>    
+
+    // 運勢結果を示す
+
+        const results = [
+                    "大吉",
+                    "中吉",
+                    "末吉",
+                    "凶",
+                    "凶",
+                    "凶",
+                    "大凶",
+                    "大凶",
+                    "大凶",
+                    "大凶"
+        ]
+
+        function draw(){
+            const key = Math.floor(Math.random()*results.length)
+            console.log(key)
+        const fortune = document.getElementById("fortune")
+        fortune.textContent = results[key]
+        $("h2").css("opacity", "100");
+
+        }
+            
+            
+        // const results = [
+        //             "大吉",
+        //             "中吉",
+        //             "凶",
+        //             "凶",
+        //             "凶",
+        //             "大凶",
+        //             "大凶",
+        //             "大凶",
+        //             "大凶"
+        // ]
+
+        // function draw(){
+        //     const key = Math.floor(Math.random()*results.length)
+        //     console.log(key)
+        // const fortune = document.getElementById("fortune")
+        // fortune.textContent = results[key]
+        // }
+     
+
+        // GSおみくじ関数部分  
+
+        // const r = Math.ceil(Math.random()*8);
+        // let view = "";
+        // if(r == 1){ 
+        //     view = "大吉";
+        // }
+
+        // if(r == 2){
+        //     view = "中吉";
+        // }
+
+        // if(r == 3){
+        //     view = "小吉";
+        // }
+
+        // if(r == 4){
+        //     view = "　凶　";
+        // }
+
+        // if(r == 5){
+        //     view = "　凶　";
+        // }
+
+        // if(r == 6){
+        //     view = "大凶";
+        // }
+
+        // if(r == 7){
+        //     view = "大凶";
+        // }
+
+        // if(r == 8){
+        //     view = "大凶";
+        // }
+
+        // alert(view);
+
+
+    </script>
+</div> 
+
+<!-- footer -->
+<footer>
+    <p> Copyrights2021 Ataranai Fortune Teller Co. Ltd., All Rights Reserved</p>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script>
+</body>
+</html>
+  
+</body>
+</html>
